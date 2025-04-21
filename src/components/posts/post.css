@@ -1,0 +1,17 @@
+.post-shadow {
+  box-shadow: 0 0 0.08rem 0.005rem #94a3b8;
+}
+.three-dots-options {
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}
+.three-dots-options:hover {
+  cursor: pointer;
+  filter: invert(80%) sepia(0%) saturate(100%) hue-rotate(0deg) brightness(100%)
+    contrast(100%);
+  -webkit-filter: invert(80%) sepia(0%) saturate(100%) hue-rotate(0deg)
+    brightness(100%) contrast(100%);
+}

@@ -10,7 +10,7 @@ interface PostProps {
   };
 }
 
-export default function App({ post }: PostProps) {
+export default function Post({ post }: PostProps) {
   return (
     <article className="bg-white border-[0.05rem] border-[#eee] mb-2 post-shadow">
       <header className="p-4 flex justify-between items-center">

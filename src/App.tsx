@@ -1,13 +1,24 @@
 // import { useState } from 'react'
-import { Login } from "./pages/login";
+import { Auth } from "./components/forms/Auth";
+import { Routes, Route } from "react-router";
 import "./App.css";
-
-import Feed from "./components/posts/Feed";
+import axios from "axios";
+import Error from "./pages/Error";
+import { Home } from "./pages/Home";
+// import NavBar from "./components/NavBar";
 function App() {
+  // should handle routing if user is authenticated or not
+  // or popup modal to ask him if he want to LoginSignup first
+  //add navbar component
   return (
     <>
-      <Feed />
-      {/* <Login /> */}
+      <Routes>
+        {/* header , static components */}
+
+        <Route path="" element={<Home />} />
+        <Route path="auth" element={<Auth />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
     </>
   );
 }

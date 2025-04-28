@@ -1,11 +1,11 @@
 import * as React from "react";
 import Post from "./Post";
-// export interface IAppProps {
+// export interface IFeedProps {
 // }
 
-export default function App() {
+export default function Feed() {
   const postInfo = {
-    usrImg: "/image.png",
+    usrImg: "/sample-profile.png",
     usrName: "Carla",
     postTime: "1h",
     postPara:

@@ -1,40 +1,76 @@
-import * as React from "react";
+// import * as React from "react";
+
 import { NavLink } from "react-router";
+import { useAuth } from "../contexts/AuthContext";
 
-export interface IAppProps {}
+export interface INavBarProps {}
 
-export default function NavBar(props: IAppProps) {
+export default function NavBar() {
+  const { user } = useAuth();
+  // console.log(user);
   return (
     <>
-      <div className="w-full  h-16 mb-6 bg-[#242424] shadow-[0px_0px_2rem_0.1rem_#000000] flex flex-row align-middle justify-end ">
-        <ul className="flex flex-row items-center gap-1 h-full mr-8">
-          <li>
-            <NavLink
-              to={"login"}
-              className={({ isActive }) =>
-                isActive
-                  ? "text-white font-semibold px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 transition-colors"
-                  : "text-gray-300  py-2 hover:text-white transition-colors"
-              }
-            >
-              Login
-            </NavLink>
-          </li>
+      <nav className="w-full p-2  h-16 mb-4 bg-[#242424] shadow-[0px_0px_2rem_0.1rem_#000000]">
+        <div className="align-middle">
+          <ul className="flex flex-row justify-between align-middle  gap-1 h-full mr-8">
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex-3/4  text-white font-semibold px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 transition-colors"
+                    : "flex-3/4  text-gray-300 px-4 py-2 hover:text-white transition-colors"
+                }
+              >
+                Home
+              </NavLink>
+            </li>
+            {user?.username && (
+              <li>
+                <NavLink
+                  to={`profile/:${user.username}`}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-white font-semibold px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 transition-colors"
+                      : "text-gray-300  py-2 hover:text-white transition-colors"
+                  }
+                >
+                  {user.username}
+                </NavLink>
+              </li>
+            )}
+            {!user && (
+              <>
+                <li>
+                  <NavLink
+                    to={"login"}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-white font-semibold px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 transition-colors"
+                        : "text-gray-300  py-2 hover:text-white transition-colors"
+                    }
+                  >
+                    Login
+                  </NavLink>
+                </li>
 
-          <li>
-            <NavLink
-              to={"signup"}
-              className={({ isActive }) =>
-                isActive
-                  ? "text-white font-semibold  py-2 rounded-md bg-blue-600 hover:bg-blue-700 transition-colors"
-                  : "text-gray-300 px-4 py-2 hover:text-white transition-colors"
-              }
-            >
-              Sign Up
-            </NavLink>
-          </li>
-        </ul>
-      </div>
+                <li>
+                  <NavLink
+                    to={"signup"}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-white font-semibold  py-2 rounded-md bg-blue-600 hover:bg-blue-700 transition-colors"
+                        : "text-gray-300 px-4 py-2 hover:text-white transition-colors"
+                    }
+                  >
+                    Sign Up
+                  </NavLink>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
+      </nav>
     </>
   );
 }

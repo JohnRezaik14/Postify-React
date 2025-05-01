@@ -1,4 +1,4 @@
-import * as React from "react";
+// import * as React from "react";
 
 export interface IEmailInputProps {
   register: any;
@@ -13,7 +13,7 @@ export default function EmailInput({ register, errors }: IEmailInputProps) {
       <input
         className="ff-input"
         type="text"
-        placeholder="placeholder for form"
+        placeholder="your email"
         {...register("email")}
         name="email"
       />

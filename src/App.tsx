@@ -1,24 +1,51 @@
 // import { useState } from 'react'
-import { Auth } from "./components/forms/Auth";
-import { Routes, Route } from "react-router";
+
+import { Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
-import axios from "axios";
 import Error from "./pages/Error";
 import { Home } from "./pages/Home";
+import Auth from "./pages/Auth";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import React from "react";
+import { ToastContainer } from "react-toastify";
 // import NavBar from "./components/NavBar";
-function App() {
-  // should handle routing if user is authenticated or not
-  // or popup modal to ask him if he want to LoginSignup first
-  //add navbar component
+
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { isAuthenticated, loading } = useAuth();
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (!isAuthenticated) {
+    return <Navigate to="/auth" replace />;
+  }
+  return <>{children}</>;
+};
+function AppRoutes() {
   return (
     <>
+      {/* <NavBar /> */}
+      <ToastContainer />
       <Routes>
-        {/* header , static components */}
-
-        <Route path="" element={<Home />} />
-        <Route path="auth" element={<Auth />} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/auth" element={<Auth />} />
         <Route path="*" element={<Error />} />
       </Routes>
+    </>
+  );
+}
+function App() {
+  return (
+    <>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
     </>
   );
 }

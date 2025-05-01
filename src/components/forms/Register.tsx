@@ -2,36 +2,31 @@ export interface ILoginProps {}
 // import { useNavigate } from "react-router-dom";
 // import { useAuth } from "../context/authContext";
 import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
-import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-// import { useLogin } from "../hooks/useLogin";
+
+// import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../contexts/AuthContext";
 // import { useState } from "react";
-// import { useEffect } from "react";
-import "./login.css";
+
+//^ components
+
+// import ProgressBar from "../ProgressBar";
 import EmailInput from "./inputs/EmailInput";
 import PasswordInput from "./inputs/PasswordInput";
-import { SubmitOptions } from "react-router";
+import UsernameInput from "./inputs/UsernameInput";
+import { toast } from "react-toastify";
+
 type Inputs = {
+  username: string;
   email: string;
   password: string;
+  createdOn: Date;
 };
-// for login
-const schema = yup
-  .object()
-  .shape({
-    email: yup
-      .string()
-      .trim()
-      .lowercase()
-      .required("Email is required")
-      .email("Enter a valid email"),
-    password: yup.string().required().trim(),
-  })
-  .required();
+
 // for sign up
 const SignUpSchema = yup.object().shape({
-  userName: yup
+  username: yup
     .string()
     .required("Username is required")
     .min(3, "Username must be at least 3 characters")
@@ -56,53 +51,59 @@ const SignUpSchema = yup.object().shape({
     ),
   createdOn: yup.date().default(() => new Date()),
 });
-export function Auth() {
+
+export function Register(props: any) {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(SignUpSchema),
   });
-  const handlesubmit: SubmitHandler<Inputs> = (data: Inputs) => {
-    console.log(data);
-    // console.log(typeof data);
-
-    axios
-      .post("http://localhost:3001/signin", data)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const { register: registerUser } = useAuth();
+  const handlesubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
+    const response = await registerUser(
+      data.username,
+      data.email,
+      data.password
+    );
+    // console.log(response);
+    toast.error(response.error);
   };
   const handleError: SubmitErrorHandler<Inputs> = (errors: any) => {
     console.log(errors);
   };
+  const handleAuthSwitch = () => {
+    props.setAuthMode((prev: boolean) => !prev);
+  };
+  // const { authUser, loading, error } = useAuth(type);
   return (
-    <div className="login">
+    <>
+      {/* <ProgressBar loading={loading} /> */}
+      {/* <ToastContainer autoClose={3000} /> */}
       <form onSubmit={handleSubmit(handlesubmit, handleError)}>
         <div className="login-form sm:w-sm md:md w-md">
+          <UsernameInput register={register} errors={errors} />
           <EmailInput register={register} errors={errors} />
           <PasswordInput register={register} errors={errors} />
-          <div className="form-message h-6">
-            {/* <p>here to send messages and guides</p> */}
-          </div>
           <div className="form-buttons">
-            <button type="submit" className="form-button">
-              Log in
+            <button type="submit" className="form-button hover:text-[#1058b4]">
+              Sign Up
             </button>
-            <p>
+
+            <p className="text-[#ccc]">
               Already a member?{" "}
-              <button className="text-purple-400 font-bold hover:text-violet-300 cursor-pointer">
+              <button
+                className="text-[#1058b4] font-bold hover:text-[#eff8fa] transition-all ease-in-out duration-300 cursor-pointer"
+                onClick={handleAuthSwitch}
+              >
                 {" "}
-                create an account
+                Signin
               </button>{" "}
             </p>
           </div>
         </div>
       </form>
-    </div>
+    </>
   );
 }

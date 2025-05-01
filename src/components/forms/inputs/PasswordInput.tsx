@@ -1,4 +1,4 @@
-import * as React from "react";
+// import * as React from "react";
 
 export interface IPasswordInputProps {
   register: any;
@@ -18,7 +18,7 @@ export default function PasswordInput({
         className="ff-input"
         type="password"
         autoComplete="off"
-        placeholder="placeholder for form"
+        placeholder="your password"
         {...register("password")}
         name="password"
       />

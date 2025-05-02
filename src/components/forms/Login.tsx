@@ -5,9 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 // import { useAuth } from "../../hooks/useAuth";
 import { useAuth } from "../../contexts/AuthContext";
-import EmailInput from "./inputs/EmailInput";
-import PasswordInput from "./inputs/PasswordInput";
-
+import EmailInput from "../inputs/Email.Input";
+import PasswordInput from "../inputs/Password.Input";
 import { toast } from "react-toastify";
 // import ProgressBar from "../ProgressBar";
 

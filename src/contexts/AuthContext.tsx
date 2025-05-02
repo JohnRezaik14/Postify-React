@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -26,34 +26,26 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const baseUrl = import.meta.env.VITE_SERVER_BASE_URL;
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const baseUrl = "http://localhost:3001/";
-
   // Check if user is already logged in (on app load)
   useEffect(() => {
     const checkAuth = async () => {
+      setLoading(true);
+
       try {
         const token = Cookies.get("token");
-
         if (token) {
-          // Verify token with backend
-          // headers: {
-          //   Authorization: `Bearer ${token}`,
-          // },
-          const response = await axios.get(`${baseUrl}users/me`, {
-            withCredentials: true,
-          });
-          console.log(response);
-
-          setUser(response.data.user);
+        } else {
+          setUser(null); // If no token
         }
       } catch (err) {
-        console.error("Authentication check failed");
-        Cookies.remove("token");
+        console.error("Authentication check failed", err);
+        setUser(null); // If token is invalid or expired
       } finally {
         setLoading(false);
       }
@@ -79,19 +71,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         }
       );
 
-      const { token, user: userData } = response.data;
-
+      const { accessToken, user } = response.data;
+      // console.log(token);
+      // console.log(response);
       // Store token
-      Cookies.set("token", token);
+      Cookies.set("token", accessToken);
       //   localStorage.setItem("token", token);
 
       // Update user state
-      setUser(userData);
+      setUser(user);
 
       // Navigate to home or dashboard
       navigate("/");
 
-      return { success: true, data: userData };
+      return { success: true, data: user };
     } catch (err: any) {
       //   console.log(err);
 

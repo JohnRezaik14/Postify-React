@@ -12,9 +12,9 @@ import { useAuth } from "../../contexts/AuthContext";
 //^ components
 
 // import ProgressBar from "../ProgressBar";
-import EmailInput from "./inputs/EmailInput";
-import PasswordInput from "./inputs/PasswordInput";
-import UsernameInput from "./inputs/UsernameInput";
+import EmailInput from "../inputs/Email.Input";
+import PasswordInput from "../inputs/Password.Input";
+import UsernameInput from "../inputs/Username.Input";
 import { toast } from "react-toastify";
 
 type Inputs = {

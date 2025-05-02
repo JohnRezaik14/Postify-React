@@ -14,7 +14,7 @@ import { useState } from "react";
 //errors
 //loading state
 export function useAuth(type: "signin" | "signup" = "signin") {
-  const baseUrl = "http://localhost:3001/";
+  const baseUrl = import.meta.env.VITE_SERVER_BASE_URL;
 
   //intial states
   const [loading, setLoading] = useState(false);

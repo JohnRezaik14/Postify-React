@@ -30,10 +30,9 @@ Postify is a simple React app scaffolded with **Vite** and **TypeScript**, desig
 
 ```plaintext
 src/
- ├── components/       # Reusable UI components (PostCard, PostForm, etc.)
+ ├── components/       # Reusable UI components (Posts components, forms, buttons, inputs etc.)
  ├── pages/            # Main app pages or views
- ├── assets/           # Images, icons, styles
- ├── types/            # TypeScript type definitions
+ ├── hooks/            # custom hooks for fetching data,uploading images, save/update posts
  ├── App.tsx          # Main application component
  └── main.tsx         # Vite entry point
 ```

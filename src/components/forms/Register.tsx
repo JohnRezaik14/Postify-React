@@ -1,7 +1,7 @@
 export interface ILoginProps {}
 // import { useNavigate } from "react-router-dom";
 // import { useAuth } from "../context/authContext";
-import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
@@ -70,9 +70,9 @@ export function Register(props: any) {
     // console.log(response);
     toast.error(response.error);
   };
-  const handleError: SubmitErrorHandler<Inputs> = (errors: any) => {
-    console.log(errors);
-  };
+  // const handleError: SubmitErrorHandler<Inputs> = (errors: any) => {
+  //   // console.log(errors);
+  // };
   const handleAuthSwitch = () => {
     props.setAuthMode((prev: boolean) => !prev);
   };
@@ -81,7 +81,7 @@ export function Register(props: any) {
     <>
       {/* <ProgressBar loading={loading} /> */}
       {/* <ToastContainer autoClose={3000} /> */}
-      <form onSubmit={handleSubmit(handlesubmit, handleError)}>
+      <form onSubmit={handleSubmit(handlesubmit)}>
         <div className="login-form sm:w-sm md:md w-md">
           <UsernameInput register={register} errors={errors} />
           <EmailInput register={register} errors={errors} />

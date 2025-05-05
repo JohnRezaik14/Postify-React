@@ -24,7 +24,7 @@ export default function useFetchposts() {
         // console.log(response);
       } catch (error) {
         // console.log(dataServerState);
-        console.log(error);
+        // console.log(error);
         // console.log(navigator);
         // console.log(navigator.connection);
       }

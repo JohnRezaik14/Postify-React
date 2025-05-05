@@ -8,7 +8,7 @@ import Auth from "./pages/Auth";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import React from "react";
 import { ToastContainer } from "react-toastify";
-import AddPost from "./pages/AddPost";
+import AddPost from "./components/posts/AddPost";
 // import NavBar from "./components/NavBar";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -16,7 +16,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  console.log(isAuthenticated, loading);
+  // console.log(isAuthenticated, loading);
 
   if (!isAuthenticated) {
     return <Navigate to="/auth" replace />;

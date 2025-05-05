@@ -2,7 +2,7 @@
 import Feed from "../components/posts/Feed";
 // import { Outlet } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import FloatingActionButtonSize from "../components/inputs/AddButton";
+import FloatingActionButtonSize from "../components/buttons/AddButton";
 import { NavLink } from "react-router";
 // import { ToastContainer } from "react-toastify";
 export interface IAppProps {}

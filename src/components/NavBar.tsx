@@ -2,7 +2,7 @@
 
 import { NavLink } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
-import SearchInput from "./inputs/Search.Input";
+// import SearchInput from "./inputs/Search.Input";
 
 export interface INavBarProps {}
 
@@ -26,16 +26,17 @@ export default function NavBar() {
                 Home
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <SearchInput />
-            </li>
+            </li> */}
             {user?.username && (
               <li>
                 <NavLink
-                  to={`profile/:${user.username}`}
+                  // to={`profile/:${user.username}`}
+                  to="/"
                   className={({ isActive }) =>
                     isActive
-                      ? "text-white font-semibold px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-700 transition-colors"
+                      ? "text-white font-semibold px-4 py-2 rounded-md  "
                       : "text-gray-300  py-2 hover:text-white transition-colors"
                   }
                 >

@@ -18,6 +18,7 @@ export interface PostData {
 export interface PostProps {
   post: PostData;
   handleDeletePost: Function;
+  handleEditClick: Function;
 }
 const colorList = [
   colors.red[500],
@@ -37,7 +38,11 @@ const colorList = [
   colors.orange[500],
   colors.deepOrange[500],
 ];
-export default function Post({ post, handleDeletePost }: PostProps) {
+export default function Post({
+  post,
+  handleDeletePost,
+  handleEditClick,
+}: PostProps) {
   const { user } = useAuth();
 
   const timeAgo = formatDistanceToNow(new Date(post.createdOn), {
@@ -76,7 +81,9 @@ export default function Post({ post, handleDeletePost }: PostProps) {
           <OptionsButton
             author={post.username === user?.username}
             handleDeletePost={handleDeletePost}
+            handleEditClick={handleEditClick}
             id={post.id}
+            post={post}
           />
         </div>
       </header>

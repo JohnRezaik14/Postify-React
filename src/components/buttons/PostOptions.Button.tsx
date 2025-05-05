@@ -98,7 +98,13 @@ export default function OptionsButton(props: any) {
       >
         {props.author ? (
           <div>
-            <MenuItem onClick={handleClose} disableRipple>
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                props.handleEditClick(props.post);
+              }}
+              disableRipple
+            >
               <EditIcon />
               Edit
             </MenuItem>

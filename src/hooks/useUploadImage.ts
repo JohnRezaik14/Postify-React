@@ -1,5 +1,5 @@
 import axios from "axios";
-export const uploadImage = async (file: File): Promise<any> => {
+export const uploadImage = async (file: File): Promise<string> => {
   const apiKey = import.meta.env.VITE_IMGBB_API_KEY;
   const url = `https://api.imgbb.com/1/upload?key=${apiKey}`;
 

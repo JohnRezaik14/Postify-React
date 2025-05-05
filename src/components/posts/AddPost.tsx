@@ -1,34 +1,13 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 // import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+
 import { toast } from "react-toastify";
-import FormField from "../components/inputs/FormField";
-import { uploadImage } from "../hooks/useUploadImage";
-import { useSavePost } from "../hooks/savePost";
-import { useAuth } from "../contexts/AuthContext";
+import FormField from "../../components/inputs/FormField";
+import { uploadImage } from "../../hooks/useUploadImage";
+import { useSavePost } from "../../hooks/savePost";
+import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router";
-
-export interface IAddPostProps {}
-
-// Define the Yup schema
-const schema = yup.object({
-  title: yup.string().trim().required("Title is required"),
-  body: yup.string().trim().required("Post Body is required"),
-
-  image: yup
-    .mixed<FileList>()
-    .test("fileSize", "File too large, 5 MB max", (value) => {
-      if (!value || value.length === 0) return true; // Allow empty
-      const file = value[0];
-      return file.size <= 5 * 1024 * 1024; // 5MB limit
-    })
-    .test("fileType", "Unsupported file type", (value) => {
-      if (!value || value.length === 0) return true;
-      const file = value[0];
-      return ["image/jpeg", "image/png", "image/gif"].includes(file.type);
-    }),
-  createdOn: yup.number().default(() => new Date().getTime()),
-});
+import { AddPostSchema } from "../../schemas/add.Post.schema";
 
 // Define Inputs type manually
 type Inputs = {
@@ -40,7 +19,7 @@ type Inputs = {
 export default function AddPost() {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const savePost = useSavePost();
+  const { savePost } = useSavePost();
   const {
     register,
     handleSubmit,
@@ -54,9 +33,10 @@ export default function AddPost() {
   });
   const handlesubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      await schema.validate(data);
+      await AddPostSchema.validate(data);
       let imgUrl: string = "";
       const file = data.image[0];
+
       if (file) {
         imgUrl = await uploadImage(file);
       }
@@ -67,14 +47,15 @@ export default function AddPost() {
         userId: user?.id,
         username: user?.username,
       };
-      console.log(post);
-      const saveResponse = await savePost(post);
-      console.log(saveResponse);
+
+      // console.log(post);
+      await savePost(post);
+      // console.log(saveResponse);
       toast.success("Post submitted successfully");
       navigate("/");
     } catch (error) {
       // toast.error(error);
-      console.log(error);
+      // console.log(error);
     }
   };
 

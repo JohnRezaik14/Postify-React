@@ -77,17 +77,20 @@ export default function Post({
             <time className="text-sm text-gray-500">{timeAgo}</time>
           </div>
         </div>
-        <div className="post-actions">
-          <OptionsButton
-            author={post.username === user?.username}
-            handleDeletePost={handleDeletePost}
-            handleEditClick={handleEditClick}
-            id={post.id}
-            post={post}
-          />
-        </div>
+        {post.username === user?.username && (
+          <div className="post-actions">
+            <OptionsButton
+              author={post.username === user?.username}
+              handleDeletePost={handleDeletePost}
+              handleEditClick={handleEditClick}
+              id={post.id}
+              post={post}
+            />
+          </div>
+        )}
       </header>
       <main className="p-4">
+        <p className="mb-4 font-bold text-zinc-800">{post.title}</p>
         <p className="mb-4">{post.body}</p>
         <div className="post-media">
           <img

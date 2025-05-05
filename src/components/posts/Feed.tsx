@@ -43,8 +43,8 @@ export default function Feed() {
     try {
       const baseUrl = import.meta.env.VITE_SERVER_BASE_URL;
       await axios.put(`${baseUrl}posts/${editedPost.id}`, editedPost);
-      toast.success("post edited successfully");
       setPosts(newPosts);
+      toast.success("post edited successfully");
       // console.log(response);
     } catch (error) {
       setPosts(oldPosts);

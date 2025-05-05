@@ -73,11 +73,6 @@ VITE_SERVER_BASE_URL=your_backend_server_url_here
 npm run dev
 ```
 
-## 🌍 Live Demo
-
-*(Coming soon)*
-
----
 
 
 

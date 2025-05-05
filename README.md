@@ -39,50 +39,46 @@ src/
 
 ---
 
-## 🚀 Getting Started
+---
 
-### Clone the Repository
+## 📂 Project Setup
+
+1️⃣ **Clone the repository:**
 
 ```bash
 git clone https://github.com/JohnRezaik14/Postify-React.git
 cd Postify-React
 ```
 
-### Install Dependencies
+2️⃣ **Install dependencies:**
 
 ```bash
 npm install
 ```
 
-### Run the App
+3️⃣ **Prepare your `.env` file:**
+
+Create a `.env` file at the root with the following:
+
+```env
+VITE_IMGBB_API_KEY=your_imgbb_api_key_here
+VITE_SERVER_BASE_URL=your_backend_server_url_here
+```
+
+> 🔑 **VITE\_IMGBB\_API\_KEY:** Get your API key from [ImgBB](https://api.imgbb.com/) to enable image uploads.
+> 🌐 **VITE\_SERVER\_BASE\_URL:** Provide the base URL of your backend API (e.g., `http://localhost:3000`).
+
+4️⃣ **Run the app:**
 
 ```bash
 npm run dev
 ```
-
-### Build for Production
-
-```bash
-npm run build
-```
-
----
-
-## 🧩 Roadmap / Future Features
-
-* 🔐 **User Authentication** (login/signup)
-* 🌐 **Backend Integration** (with a real API or Firebase)
-* 📈 **Like / Reaction System**
-* 📊 **Post Analytics Dashboard**
-* 🏷️ **Tagging System for Posts**
-* 🔔 **Notifications**
-
----
 
 ## 🌍 Live Demo
 
 *(Coming soon)*
 
 ---
+
 
 

@@ -37,7 +37,6 @@ src/
  └── main.tsx         # Vite entry point
 ```
 
----
 
 ---
 
